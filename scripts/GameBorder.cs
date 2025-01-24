@@ -25,8 +25,8 @@ public partial class GameBorder : Node {
         if (body is Player player) {
             GD.Print("Player entered the border!");
             // Reset player position or trigger an event
-            ResetPlayerPosition(player); }
-        else if (body is Enemy enemy) {
+            ResetPlayerPosition(player); 
+        } else if (body is Enemy enemy) {
             GD.Print("Enemy entered the border!");
 
             // Check if the enemy has entered the border before

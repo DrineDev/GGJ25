@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ougd2ti33q20"]
+
+[ext_resource type="Texture2D" uid="uid://cemmv7wio6ffi" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_5fj62"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tihl"]
+atlas = ExtResource("1_5fj62")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irxa8"]
+atlas = ExtResource("1_5fj62")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxdha"]
+atlas = ExtResource("1_5fj62")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fb337"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tihl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irxa8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxdha")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Bush1" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fb337")
+animation = &"new_animation"

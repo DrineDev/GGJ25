@@ -1,45 +1,103 @@
 using Godot;
 
-public partial class Enemy : Node2D {
-    public const float Speed = 300.0f;
+public partial class Enemy : Node2D
+{
+    // Constants for enemy behavior
+    public const float Speed = 100.0f; // Speed when chasing the player
+    public const float WanderSpeed = 50.0f; // Speed when wandering
+    public const float WaitTime = 3.0f; // Time to wait before leaving
 
+    // Property to track if the enemy has entered the border
+    public bool HasEnteredBorder { get; set; } = false;
+
+    // Private fields
     private Player _player; // Reference to the player
-    private Area2D _hitbox; // Hitbox for detecting collisions with the player
+    private Vector2 _wanderDirection; // Direction for wandering
+    private float _waitTimer = 0; // Timer for waiting
 
-    public bool HasEnteredBorder { get; set; } = false; // Flag to track border entry
-
-    public override void _Ready() {
+    public override void _Ready()
+    {
         // Find the player node in the scene
         _player = GetNode<Player>("/root/Game/Player"); // Adjust the path to your player node
 
-        if (_player == null) {
+        if (_player == null)
+        {
             GD.PrintErr("Player node not found!");
-        } else {
+        }
+        else
+        {
             GD.Print("Player node found successfully.");
         }
 
-        // Get the hitbox area (ensure the enemy has an Area2D child for collision detection)
-        _hitbox = GetNode<Area2D>("Hitbox");
-
-        // Connect the Area2D's body_entered signal to handle collisions
-        _hitbox.BodyEntered += OnBodyEntered;
+        // Start wandering
+        SetWanderDirection();
     }
 
-    public override void _Process(double delta) {
-        if (_player != null) {
-            // Calculate the direction to the player
-            Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+    public override void _Process(double delta)
+    {
+        if (_player == null) return;
 
-            // Move the enemy toward the player
-            Position += direction * Speed * (float)delta;
+        if (_player.IsInStealthMode)
+        {
+            // Player is in stealth mode, wander or wait
+            if (_waitTimer > 0)
+            {
+                _waitTimer -= (float)delta; // Decrease the wait timer
+                GD.Print("Enemy is waiting...");
+            }
+            else
+            {
+                Wander((float)delta); // Wander around
+            }
+        }
+        else
+        {
+            // Player is visible, chase the player
+            ChasePlayer((float)delta);
         }
     }
 
-    private void OnBodyEntered(Node body) {
+    private void ChasePlayer(float delta)
+    {
+        // Calculate the direction to the player
+        Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+
+        // Move the enemy toward the player
+        Position += direction * Speed * delta;
+    }
+
+    private void Wander(float delta)
+    {
+        // Move in the wander direction
+        Position += _wanderDirection * WanderSpeed * delta;
+
+        // Change direction randomly
+        if (GD.Randf() < 0.01f) // 1% chance to change direction each frame
+        {
+            SetWanderDirection();
+        }
+    }
+
+    private void SetWanderDirection()
+    {
+        // Set a random wander direction
+        _wanderDirection = new Vector2(GD.Randf() - 0.5f, GD.Randf() - 0.5f).Normalized();
+    }
+
+    public void OnPlayerHidden()
+    {
+        // Called when the player enters stealth mode
+        _waitTimer = WaitTime; // Start the wait timer
+        GD.Print("Enemy lost track of the player!");
+    }
+
+    private void OnBodyEntered(Node body)
+    {
         GD.Print("Body entered the enemy's hitbox!"); // Debug print
 
         // Check if the body that entered the hitbox is the player
-        if (body is Player player) {
+        if (body is Player player)
+        {
             GD.Print("Enemy hit the player!");
             player.TakeDamage(1); // Reduce the player's HP by 1
             QueueFree(); // Despawn the enemy

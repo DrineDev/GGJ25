@@ -11,8 +11,18 @@ config_version=5
 [application]
 
 config/name="GGJ25"
-config/features=PackedStringArray("4.3", "Mobile")
+run/main_scene="res://Game.tscn"
+config/features=PackedStringArray("4.3", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=1000
+
+[dotnet]
+
+project/assembly_name="GGJ25"
 
 [rendering]
 

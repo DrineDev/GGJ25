@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class GameManager : Node2D
+public partial class PlatformManager : Node2D
 {
     [Export] private Node2D _scene; // Parent node for instantiated groups
     [Export] private float _levelSpeed = 100f; // Speed at which groups move
@@ -10,21 +10,27 @@ public partial class GameManager : Node2D
 
     private float _currentGroupProgress = 0; // Tracks movement progress
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         _currentGroupProgress = 0;
 
         // Initialize groups to fill the screen and make sure it scrolls infinitely
         int initialGroups = Mathf.CeilToInt(GetViewportRect().Size.Y / _groupLength) + 2; // Dynamically calculate based on screen height
-        for (int i = 0; i < initialGroups; i++) {
+        for (int i = 0; i < initialGroups; i++)
+        {
             _InstantiateGroup(-(i + 1)); // Instantiate groups at negative y values
         }
     }
-    public override void _Process(double delta) {
+
+    public override void _Process(double delta)
+    {
         float progress = _levelSpeed * (float)delta;
 
         // Move all children of _scene downward
-        foreach (Node child in _scene.GetChildren()) {
-            if (child is Node2D node2D) {
+        foreach (Node child in _scene.GetChildren())
+        {
+            if (child is Node2D node2D)
+            {
                 node2D.GlobalPosition += new Vector2(0, progress);
             }
         }
@@ -32,10 +38,12 @@ public partial class GameManager : Node2D
         // Track progress for instantiating and removing groups
         _currentGroupProgress += progress;
 
-        if (_currentGroupProgress >= _groupLength) {
+        if (_currentGroupProgress >= _groupLength)
+        {
             // Spawn a new group above the top of the screen
             Node2D lastGroup = _scene.GetChild(_scene.GetChildCount() - 1) as Node2D;
-            if (lastGroup != null) {
+            if (lastGroup != null)
+            {
                 // Calculate the y-position for the new group
                 float newY = lastGroup.GlobalPosition.Y - _groupLength;
                 _InstantiateGroupAtY(newY);
@@ -43,7 +51,8 @@ public partial class GameManager : Node2D
 
             // Remove the first group only if it is completely out of view
             Node2D firstGroup = _scene.GetChild(0) as Node2D;
-            if (firstGroup != null && firstGroup.GlobalPosition.Y >= GetViewportRect().Size.Y) {
+            if (firstGroup != null && firstGroup.GlobalPosition.Y >= GetViewportRect().Size.Y)
+            {
                 firstGroup.QueueFree();
             }
 
@@ -52,11 +61,13 @@ public partial class GameManager : Node2D
         }
     }
 
-    private void _InstantiateGroup(int offset = 0, int type = -1) {
+    private void _InstantiateGroup(int offset = 0, int type = -1)
+    {
         int index = (type == -1) ? (int)(GD.Randi() % _groups.Length) : type;
         PackedScene selectedScene = _groups[index];
 
-        if (selectedScene == null) {
+        if (selectedScene == null)
+        {
             GD.PrintErr("Invalid PackedScene in _groups array!");
             return;
         }
@@ -71,11 +82,13 @@ public partial class GameManager : Node2D
         GD.Print($"Instantiated group at offset {offset}, y = {offset * _groupLength}");
     }
 
-    private void _InstantiateGroupAtY(float y, int type = -1) {
+    private void _InstantiateGroupAtY(float y, int type = -1)
+    {
         int index = (type == -1) ? (int)(GD.Randi() % _groups.Length) : type;
         PackedScene selectedScene = _groups[index];
 
-        if (selectedScene == null) {
+        if (selectedScene == null)
+        {
             GD.PrintErr("Invalid PackedScene in _groups array!");
             return;
         }

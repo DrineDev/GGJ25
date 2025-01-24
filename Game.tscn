@@ -1,18 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://buqf21g67rpm0"]
+[gd_scene load_steps=12 format=3 uid="uid://buqf21g67rpm0"]
 
-[ext_resource type="PackedScene" uid="uid://pg5h6q2hfbts" path="res://player.tscn" id="1_rv8vb"]
+[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_562g2"]
+[ext_resource type="PackedScene" uid="uid://5moy68455klq" path="res://player.tscn" id="1_rv8vb"]
 [ext_resource type="PackedScene" uid="uid://bn8kn4lqubxi3" path="res://GameManager.tscn" id="3_72ay3"]
 [ext_resource type="PackedScene" uid="uid://c55lrkk7s4ubv" path="res://Block1.tscn" id="3_kv667"]
+[ext_resource type="PackedScene" uid="uid://djgqjshggqxig" path="res://Block3.tscn" id="4_tpjyn"]
+[ext_resource type="PackedScene" uid="uid://bivhddv20xf07" path="res://Block2.tscn" id="5_v6eha"]
+[ext_resource type="PackedScene" uid="uid://m4r78j66lk03" path="res://Enemy.tscn" id="8_pkqu3"]
+[ext_resource type="AudioStream" uid="uid://bhlirvn23ynos" path="res://music and maybe effects/main menu.wav" id="9_itdb7"]
+[ext_resource type="Script" path="res://scripts/GameBorder.cs" id="10_lxy3p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_diujn"]
+size = Vector2(652.25, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmql8"]
+size = Vector2(59, 1286)
 
 [node name="Game" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_rv8vb")]
-position = Vector2(5, 379)
+script = ExtResource("1_562g2")
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("3_72ay3")]
 _scene = NodePath(".")
+_groups = Array[PackedScene]([ExtResource("3_kv667"), ExtResource("5_v6eha"), ExtResource("4_tpjyn")])
 
-[node name="Block1" parent="GameManager" instance=ExtResource("3_kv667")]
-position = Vector2(1, 481)
+[node name="GameManager2" parent="." instance=ExtResource("3_72ay3")]
+_groups = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("8_pkqu3"), ExtResource("8_pkqu3")])
+
+[node name="Player" parent="." instance=ExtResource("1_rv8vb")]
+position = Vector2(1, 452)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="GameBorder" type="Node2D" parent="."]
+script = ExtResource("10_lxy3p")
+
+[node name="BottomBorder" type="Area2D" parent="GameBorder"]
+position = Vector2(2, -1080)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/BottomBorder"]
+position = Vector2(6, 1635)
+shape = SubResource("RectangleShape2D_diujn")
+
+[node name="TopBorder" type="Area2D" parent="GameBorder"]
+position = Vector2(1, -540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/TopBorder"]
+position = Vector2(1, 11)
+shape = SubResource("RectangleShape2D_diujn")
+
+[node name="RightBorder" type="Area2D" parent="GameBorder"]
+position = Vector2(360, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/RightBorder"]
+position = Vector2(0, -19)
+shape = SubResource("RectangleShape2D_wmql8")
+
+[node name="LeftBorder" type="Area2D" parent="GameBorder"]
+position = Vector2(-378, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/LeftBorder"]
+position = Vector2(17, -16)
+shape = SubResource("RectangleShape2D_wmql8")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+position = Vector2(-65, -116)
+current = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-65, -116)
+stream = ExtResource("9_itdb7")
+volume_db = 24.0
+max_distance = 1e+09

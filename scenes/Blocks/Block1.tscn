@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d2sd6jq6rhsh" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_4367x"]
 [ext_resource type="PackedScene" uid="uid://ougd2ti33q20" path="res://scenes/Bush/Bush1.tscn" id="2_cyfq1"]
-[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/StealthZone.tscn" id="3_4rt54"]
+[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="3_4rt54"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fboku"]
 texture = ExtResource("1_4367x")

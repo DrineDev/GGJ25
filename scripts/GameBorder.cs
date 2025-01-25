@@ -42,7 +42,7 @@ public partial class GameBorder : Node
             // Teleport the player to the right border
             TeleportPlayer(player, new Vector2(_maxX, player.GlobalPosition.Y));
         }
-        else if (body is Enemy enemy)
+        else if (body is IEnemy enemy)
         {
             enemy.OnBorderEntered();
         }
@@ -56,7 +56,7 @@ public partial class GameBorder : Node
             // Teleport the player to the left border
             TeleportPlayer(player, new Vector2(_minX, player.GlobalPosition.Y));
         }
-        else if (body is Enemy enemy)
+        else if (body is IEnemy enemy)
         {
             enemy.OnBorderEntered();
         }
@@ -67,9 +67,9 @@ public partial class GameBorder : Node
         if (body is Player player)
         {
             GD.Print("Player entered the bottom border. Restarting game...");
-            player.RestartGame();
+            player.Die();
         }
-        else if (body is Enemy enemy)
+        else if (body is IEnemy enemy)
         {
             enemy.OnBorderEntered();
         }

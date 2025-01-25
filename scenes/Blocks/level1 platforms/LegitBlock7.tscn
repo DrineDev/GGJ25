@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl6t6ob1msxqy"]
+
+[ext_resource type="Texture2D" uid="uid://cxflaubhmoiks" path="res://assets/platforms/platform4.png" id="1_7h63j"]
+[ext_resource type="Texture2D" uid="uid://dj8n1t252gxqs" path="res://assets/platforms/platform2.png" id="2_ld2tc"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(249, -6)
+texture = ExtResource("1_7h63j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(129, 27, 107, 36, 102, 24, 109, 15, 89, 7, 71, -1, 52, -6, 35, -8, 20, 1, 21, 11, 14, 8, 5, 3, 8, 17, -2, 24, -6, 33, -5, 45, -7, 44, -12, 29, -18, 18, -29, 11, -37, 12, -69, 8, -82, 8, -92, 7, -108, 6, -116, 6, -118, 11, -125, 16, -128, 30, -132, 16, -136, 8, -142, 6, -150, 4, -157, 5, -172, 5, -184, 4, -197, -4, -198, -13, -190, -22, -172, -27, -146, -34, -120, -33, -71, -30, -70, -36, -44, -43, 4, -42, 7, -45, 7, -57, 14, -67, 20, -67, 50, -58, 58, -59, 65, -56, 67, -52, 90, -49, 101, -43, 121, -36, 132, -33, 141, -25, 149, -18, 152, -13, 151, -4, 154, 4, 155, 7, 155, 14, 149, 20, 150, 26, 143, 38, 135, 38)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-185, 118.25)
+scale = Vector2(1, 0.860656)
+texture = ExtResource("2_ld2tc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D2/StaticBody2D"]
+position = Vector2(185, -137.395)
+scale = Vector2(1, 1.1619)
+polygon = PackedVector2Array(41, 119, 34, 122, 29, 131, 19, 134, 8, 137, -3, 140, -8, 146, -12, 143, -16, 147, -20, 154, -24, 157, -36, 144, -49, 146, -59, 146, -60, 152, -62, 157, -62, 165, -62, 174, -63, 188, -67, 196, -70, 196, -71, 191, -73, 185, -75, 166, -79, 143, -88, 142, -94, 149, -97, 154, -98, 160, -105, 172, -107, 165, -114, 146, -120, 143, -145, 138, -167, 134, -170, 135, -177, 130, -179, 127, -191, 125, -204, 128, -216, 128, -259, 130, -266, 129, -268, 135, -268, 142, -269, 146, -273, 128, -288, 127, -300, 123, -324, 122, -321, 105, -288, 108, -263, 109, -246, 85, -217, 94, -200, 92, -203, 84, -176, 87, -146, 91, -123, 90, -138, 78, -154, 71, -156, 66, -145, 64, -130, 68, -116, 68, -72, 77, -68, 75, -79, 65, -83, 57, -73, 57, -58, 58, -22, 74, -18, 71, -5, 75, -3, 79, -3, 82, 12, 90, 43, 108, 43, 113)

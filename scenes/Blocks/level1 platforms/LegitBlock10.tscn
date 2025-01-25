@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvbmaaf578aem"]
+
+[ext_resource type="Texture2D" uid="uid://bnlce7vernbal" path="res://assets/platforms/platform_cave2.png" id="1_m846u"]
+[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/StealthZone.tscn" id="2_e1ts4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(56, -13)
+scale = Vector2(0.293408, 0.292453)
+texture = ExtResource("1_m846u")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(5.6982e-05, -4.76837e-07)
+polygon = PackedVector2Array(-44.3069, 177.806, -3.40823, 34.1935, 68.1645, 27.3548, 160.187, 47.871, 170.411, 44.4516, 173.819, 150.452, 201.085, 235.935, 204.493, 150.452, 228.351, 109.419, 245.392, 71.8064, 276.066, 78.6452, 340.822, 34.1935, 466.927, -85.4839, 432.845, -116.258, 364.68, -119.677, 218.126, -92.3226, 126.104, -58.129, -61.3481, -150.452, -81.7974, -147.032, -95.4303, -126.516, -78.3892, -92.3226, -279.474, -212, -296.516, -208.581, -299.924, -188.064, -269.25, -147.032, -310.148, -147.032, -361.272, -184.645, -385.129, -170.968, -436.253, -201.742, -477.151, -208.581, -501.009, -212, -511.234, -184.645, -483.968, -136.774, -565.765, -143.613, -623.705, -123.097, -746.401, -106, -794.116, -92.3226, -787.3, -61.5484, -790.708, -27.3548, -760.034, 3.41935, -708.911, 10.2581, -647.563, 27.3548, -623.705, 47.871, -548.724, 51.2903, -531.683, 102.581, -524.867, 140.194, -507.825, 64.9677, -477.151, 27.3548, -446.477, 34.1935, -361.272, 6.83871, -354.455, 44.4516, -351.047, 112.839, -344.231, 160.71, -330.598, 88.9032, -320.373, 61.5484, -296.516, 0, -269.25, 51.2903, -252.209, 10.2581, -231.759, 47.871, -129.513, 99.1613, -98.8385, 129.935, -81.7974, 112.839)
+
+[node name="StealthZone" parent="Sprite2D" instance=ExtResource("2_e1ts4")]
+position = Vector2(0, -3.41935)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StealthZone"]
+position = Vector2(344.231, -20.5161)
+polygon = PackedVector2Array(-276.066, 54.7097, -347.639, 61.5484, -368.088, 143.613, -296.516, 181.226, -211.31, 177.806, -170.411, 167.548, -177.228, 75.2258)

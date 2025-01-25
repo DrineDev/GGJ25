@@ -52,7 +52,7 @@ public partial class Player : CharacterBody2D {
         }
     }
 
-    private void RestartGame() {
+    public void RestartGame() {
         GetTree().ReloadCurrentScene();
     }
 }

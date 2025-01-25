@@ -4,7 +4,7 @@ using System;
 public partial class PlatformManager : Node2D
 {
     [Export] private Node2D _scene; // Parent node for instantiated groups
-    [Export] private float _levelSpeed = 100f; // Speed at which groups move
+    [Export] public float _levelSpeed {get; set;} = 200f; // Speed at which groups move
     [Export] private PackedScene[] _groups; // Array of group scenes to instantiate
     [Export] private float _groupLength = 250f; // Spacing between groups
 
@@ -19,6 +19,14 @@ public partial class PlatformManager : Node2D
         for (int i = 0; i < initialGroups; i++)
         {
             _InstantiateGroup(-(i + 1)); // Instantiate groups at negative y values
+        }
+
+        // Find the player node and connect to its PlayerDied signal
+        Player player = GetNode<Player>("../Player"); // Adjust the path to your player node
+        if (player != null) {
+            player.PlayerDied += OnPlayerDied;
+        } else {
+            GD.PrintErr("Player node not found!");
         }
     }
 
@@ -101,5 +109,10 @@ public partial class PlatformManager : Node2D
 
         // Debug print
         GD.Print($"Instantiated group at y = {y}");
+    }
+
+    private void OnPlayerDied() {
+        GD.Print("Player died! Stopping platform movement...");
+        _levelSpeed = 0;
     }
 }

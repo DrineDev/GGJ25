@@ -14,7 +14,7 @@ script = ExtResource("1_utbx1")
 [node name="TopBorder" type="StaticBody2D" parent="."]
 
 [node name="TopBorder" type="CollisionShape2D" parent="TopBorder"]
-position = Vector2(308, 196)
+position = Vector2(299, 125)
 shape = SubResource("RectangleShape2D_167s1")
 
 [node name="LeftBorder" type="Area2D" parent="."]

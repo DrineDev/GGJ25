@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buqf21g67rpm0"]
+[gd_scene load_steps=11 format=3 uid="uid://buqf21g67rpm0"]
 
 [ext_resource type="Script" path="res://scripts/PlatformManager.cs" id="1_562g2"]
 [ext_resource type="PackedScene" uid="uid://5moy68455klq" path="res://scenes/Basic/player.tscn" id="1_rv8vb"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://djgqjshggqxig" path="res://scenes/Blocks/Block3.tscn" id="4_tpjyn"]
 [ext_resource type="PackedScene" uid="uid://bivhddv20xf07" path="res://scenes/Blocks/Block2.tscn" id="5_v6eha"]
 [ext_resource type="PackedScene" uid="uid://djhql56qjyeat" path="res://scenes/Managers/EnemyManager.tscn" id="6_siglb"]
-[ext_resource type="PackedScene" uid="uid://m4r78j66lk03" path="res://scenes/Basic/Enemy.tscn" id="8_pkqu3"]
+[ext_resource type="PackedScene" uid="uid://d2sote2v553x8" path="res://scenes/Basic/Enemy2.tscn" id="8_ix2ca"]
+[ext_resource type="PackedScene" uid="uid://ci08es3faoc8" path="res://scenes/Basic/Enemy1.tscn" id="8_pkqu3"]
 [ext_resource type="PackedScene" uid="uid://dg4nd4re0tqvl" path="res://GameBorder.tscn" id="9_w8qqe"]
 
 [node name="Game" type="Node2D"]
@@ -19,7 +20,7 @@ _groups = Array[PackedScene]([ExtResource("3_kv667"), ExtResource("5_v6eha"), Ex
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("6_siglb")]
 _scene = NodePath(".")
-_enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("8_pkqu3"), ExtResource("8_pkqu3")])
+_enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("8_ix2ca")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

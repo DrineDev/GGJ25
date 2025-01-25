@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rao8f3255xm7" path="res://scenes/Basic/Killzone.tscn" id="3_bail7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w8qxl"]
-radius = 17.0
+radius = 24.0208
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j0oe"]
 atlas = ExtResource("2_omq2u")
@@ -203,11 +203,11 @@ script = ExtResource("1_tatqb")
 [node name="Killzone" parent="." instance=ExtResource("3_bail7")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(31, 4)
+position = Vector2(24, 4)
 shape = SubResource("CircleShape2D_w8qxl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(7.62939e-06, -2.38419e-07)
+position = Vector2(4.54747e-13, 0)
 scale = Vector2(0.197396, 0.2025)
 sprite_frames = SubResource("SpriteFrames_3q327")
 autoplay = "default"

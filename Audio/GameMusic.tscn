@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://44836tmld5c8"]
+
+[ext_resource type="AudioStream" uid="uid://bai2nundop74v" path="res://Audio/main game real.wav" id="1_cqaql"]
+
+[node name="GameMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_cqaql")
+autoplay = true

@@ -158,5 +158,5 @@ position = Vector2(-138, -55)
 [node name="StealthZone" parent="Bush1" instance=ExtResource("3_4rt54")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bush1/StealthZone"]
-position = Vector2(2.25, 1.5)
+position = Vector2(-1, 2)
 shape = SubResource("RectangleShape2D_agmgk")

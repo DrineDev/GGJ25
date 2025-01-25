@@ -1,6 +1,7 @@
 using Godot;
 
-public partial class Enemy : Node2D {
+public partial class Enemy : Node2D
+{
     // Constants for enemy behavior
     public const float Speed = 100.0f; // Speed when chasing the player
     public const float WanderSpeed = 50.0f; // Speed when wandering
@@ -14,7 +15,8 @@ public partial class Enemy : Node2D {
     private Vector2 _wanderDirection; // Direction for wandering
     private float _waitTimer = 0; // Timer for waiting
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         // Find the player node in the scene
         _player = GetNode<Player>("/root/Game/Player"); // Adjust the path to your player node
 
@@ -31,24 +33,32 @@ public partial class Enemy : Node2D {
         SetWanderDirection();
     }
 
-    public override void _Process(double delta) {
+    public override void _Process(double delta)
+    {
         if (_player == null) return;
 
-        if (_player.IsInStealthMode) {
+        if (_player.IsInStealthMode)
+        {
             // Player is in stealth mode, wander or wait
-            if (_waitTimer > 0) {
+            if (_waitTimer > 0)
+            {
                 _waitTimer -= (float)delta; // Decrease the wait timer
                 GD.Print("Enemy is waiting...");
-            } else {
+            }
+            else
+            {
                 Wander((float)delta); // Wander around
             }
-        } else {
+        }
+        else
+        {
             // Player is visible, chase the player
             ChasePlayer((float)delta);
         }
     }
 
-    private void ChasePlayer(float delta) {
+    private void ChasePlayer(float delta)
+    {
         // Calculate the direction to the player
         Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
 
@@ -56,7 +66,8 @@ public partial class Enemy : Node2D {
         Position += direction * Speed * delta;
     }
 
-    private void Wander(float delta) {
+    private void Wander(float delta)
+    {
         // Move in the wander direction
         Position += _wanderDirection * WanderSpeed * delta;
 
@@ -67,22 +78,26 @@ public partial class Enemy : Node2D {
         }
     }
 
-    private void SetWanderDirection() {
+    private void SetWanderDirection()
+    {
         // Set a random wander direction
         _wanderDirection = new Vector2(GD.Randf() - 0.5f, GD.Randf() - 0.5f).Normalized();
     }
 
-    public void OnPlayerHidden() {
+    public void OnPlayerHidden()
+    {
         // Called when the player enters stealth mode
         _waitTimer = WaitTime; // Start the wait timer
         GD.Print("Enemy lost track of the player!");
     }
 
-    private void OnBodyEntered(Node body) {
+    private void OnBodyEntered(Node body)
+    {
         GD.Print("Body entered the enemy's hitbox!"); // Debug print
 
         // Check if the body that entered the hitbox is the player
-        if (body is Player player) {
+        if (body is Player player)
+        {
             GD.Print("Enemy hit the player!");
             player.TakeDamage(1); // Reduce the player's HP by 1
             QueueFree(); // Despawn the enemy

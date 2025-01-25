@@ -1,53 +1,88 @@
 using Godot;
 
-public partial class GameBorder : Node {
+public partial class GameBorder : Node
+{
     // References to the border Area2D nodes
-    private Area2D _topBorder;
-    private Area2D _bottomBorder;
     private Area2D _leftBorder;
     private Area2D _rightBorder;
+    private Area2D _bottomBorder;
 
-    public override void _Ready() {
+    // Coordinate range
+    private float _minX = -300f;
+    private float _maxX = 300f;
+    private float _minY = -500f;
+    private float _maxY = 500f;
+
+    public override void _Ready()
+    {
         // Get references to the border Area2D nodes
-        _topBorder = GetNode<Area2D>("TopBorder");
-        _bottomBorder = GetNode<Area2D>("BottomBorder");
         _leftBorder = GetNode<Area2D>("LeftBorder");
         _rightBorder = GetNode<Area2D>("RightBorder");
+        _bottomBorder = GetNode<Area2D>("BottomBorder");
+
+        // Debug: Check if nodes are found
+        if (_leftBorder == null) GD.Print("LeftBorder not found!");
+        if (_rightBorder == null) GD.Print("RightBorder not found!");
+        if (_bottomBorder == null) GD.Print("BottomBorder not found!");
 
         // Connect the body_entered signal for each border
-        _topBorder.BodyEntered += OnBorderEntered;
-        _bottomBorder.BodyEntered += OnBorderEntered;
-        _leftBorder.BodyEntered += OnBorderEntered;
-        _rightBorder.BodyEntered += OnBorderEntered; }
+        if (_leftBorder != null)
+            _leftBorder.BodyEntered += OnLeftBorderEntered;
+        if (_rightBorder != null)
+            _rightBorder.BodyEntered += OnRightBorderEntered;
+        if (_bottomBorder != null)
+            _bottomBorder.BodyEntered += OnBottomBorderEntered;
+    }
 
-    private void OnBorderEntered(Node body) {
-        // Handle objects entering the border
-        if (body is Player player) {
-            GD.Print("Player entered the border!");
-            // Reset player position or trigger an event
-            ResetPlayerPosition(player); 
-        } else if (body is Enemy enemy) {
-            GD.Print("Enemy entered the border!");
-
-            // Check if the enemy has entered the border before
-            if (enemy.HasEnteredBorder) {
-                // Despawn the enemy if it has entered the border before
-                GD.Print("Enemy has entered the border before. Despawning...");
-                enemy.QueueFree();
-            } else {
-                // Mark the enemy as having entered the border
-                enemy.HasEnteredBorder = true;
-                GD.Print("Enemy entered the border for the first time.");
-            }
+    private void OnLeftBorderEntered(Node body)
+    {
+        if (body is Player player)
+        {
+            GD.Print("Player entered the left border. Teleporting to the right...");
+            // Teleport the player to the right border
+            TeleportPlayer(player, new Vector2(_maxX, player.GlobalPosition.Y));
+        }
+        else if (body is Enemy enemy)
+        {
+            enemy.OnBorderEntered();
         }
     }
-    private void ResetPlayerPosition(Player player) {
-        // Flip the player's X position to the opposite side and add a small offset
-        float offset = 10f; // Adjust this value as needed
-        player.GlobalPosition = new Vector2(-player.GlobalPosition.X + Mathf.Sign(player.GlobalPosition.X) * offset, player.GlobalPosition.Y);
+
+    private void OnRightBorderEntered(Node body)
+    {
+        if (body is Player player)
+        {
+            GD.Print("Player entered the right border. Teleporting to the left...");
+            // Teleport the player to the left border
+            TeleportPlayer(player, new Vector2(_minX, player.GlobalPosition.Y));
+        }
+        else if (body is Enemy enemy)
+        {
+            enemy.OnBorderEntered();
+        }
     }
-    private void ResetEnemyPosition(Enemy enemy) {
-        // Example: Reset enemy position or destroy it
-        enemy.QueueFree(); // Destroy the enemy
+
+    private void OnBottomBorderEntered(Node body)
+    {
+        if (body is Player player)
+        {
+            GD.Print("Player entered the bottom border. Restarting game...");
+            player.RestartGame();
+        }
+        else if (body is Enemy enemy)
+        {
+            enemy.OnBorderEntered();
+        }
+    }
+
+    private void TeleportPlayer(Player player, Vector2 targetPosition)
+    {
+        // Clamp the target position to the coordinate range
+        targetPosition.X = Mathf.Clamp(targetPosition.X, _minX, _maxX);
+        targetPosition.Y = Mathf.Clamp(targetPosition.Y, _minY, _maxY);
+
+        // Teleport the player to the target position
+        player.GlobalPosition = targetPosition;
+        GD.Print("Player teleported to: ", targetPosition);
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://buqf21g67rpm0"]
+[gd_scene load_steps=10 format=3 uid="uid://buqf21g67rpm0"]
 
 [ext_resource type="Script" path="res://scripts/PlatformManager.cs" id="1_562g2"]
 [ext_resource type="PackedScene" uid="uid://5moy68455klq" path="res://scenes/Basic/player.tscn" id="1_rv8vb"]
@@ -8,13 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bivhddv20xf07" path="res://scenes/Blocks/Block2.tscn" id="5_v6eha"]
 [ext_resource type="PackedScene" uid="uid://djhql56qjyeat" path="res://scenes/Managers/EnemyManager.tscn" id="6_siglb"]
 [ext_resource type="PackedScene" uid="uid://m4r78j66lk03" path="res://scenes/Basic/Enemy.tscn" id="8_pkqu3"]
-[ext_resource type="Script" path="res://scripts/GameBorder.cs" id="10_lxy3p"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_diujn"]
-size = Vector2(652.25, 58)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmql8"]
-size = Vector2(59, 1286)
+[ext_resource type="PackedScene" uid="uid://dg4nd4re0tqvl" path="res://GameBorder.tscn" id="9_w8qqe"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_562g2")
@@ -29,36 +23,8 @@ _enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("8_pkqu3"), E
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="GameBorder" type="Node2D" parent="."]
-script = ExtResource("10_lxy3p")
-
-[node name="BottomBorder" type="Area2D" parent="GameBorder"]
-position = Vector2(2, -1080)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/BottomBorder"]
-position = Vector2(6, 1635)
-shape = SubResource("RectangleShape2D_diujn")
-
-[node name="TopBorder" type="Area2D" parent="GameBorder"]
-position = Vector2(1, -540)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/TopBorder"]
-position = Vector2(1, 11)
-shape = SubResource("RectangleShape2D_diujn")
-
-[node name="RightBorder" type="Area2D" parent="GameBorder"]
-position = Vector2(360, -7)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/RightBorder"]
-position = Vector2(0, -19)
-shape = SubResource("RectangleShape2D_wmql8")
-
-[node name="LeftBorder" type="Area2D" parent="GameBorder"]
-position = Vector2(-378, -1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBorder/LeftBorder"]
-position = Vector2(17, -16)
-shape = SubResource("RectangleShape2D_wmql8")
-
 [node name="Player" parent="." instance=ExtResource("1_rv8vb")]
-position = Vector2(1, 399)
+position = Vector2(1, 342)
+
+[node name="GameBorder" parent="." instance=ExtResource("9_w8qqe")]
+position = Vector2(-304, -537)

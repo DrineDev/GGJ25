@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://8c2rdj80csjx"]
+
+[ext_resource type="Texture2D" uid="uid://dh3fxvp2tgo75" path="res://assets/platforms/Platforms1_lvl_2.png" id="1_pnjlw"]
+[ext_resource type="PackedScene" uid="uid://t7jpwprvfunf" path="res://scenes/Bush/bush_2.tscn" id="2_fc5bd"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-86, -33)
+scale = Vector2(0.405319, 0.409672)
+texture = ExtResource("1_pnjlw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(36.378, 53.4218)
+scale = Vector2(2.81017, 2.76246)
+polygon = PackedVector2Array(-239.456, 13.3557, -174.194, -18.215, -175.806, -25.2207, -187.097, -46.238, -190.323, -82.6679, -185.484, -84.0691, -164.516, -72.8599, -109.677, -23.8196, -3.22581, -9.80806, -16.129, -40.6334, -14.5161, -49.0403, -1.6129, -53.2438, 88.7097, -19.6161, 91.9355, -23.8196, 77.4193, -39.2322, 82.2581, -44.8369, 93.5484, -44.8369, 143.548, -21.0173, 148.387, -28.023, 151.613, -36.4299, 172.581, -26.6219, 180.645, -26.6219, 200, -19.6161, 203.226, -9.80806, 217.742, -5.60461, 241.935, 12.6104, 241.935, 19.6161, 220.968, 33.6276, 190.323, 47.6392, 187.097, 39.2322, 167.742, 100.883, 158.065, 39.2322, 58.0645, 33.6276, 48.3871, 47.6392, 40.3226, 35.0288, 22.5806, 35.0288, 16.129, 53.2438, 6.45161, 58.8484, 4.83871, 43.4357, -1.6129, 39.2322, -9.67742, 50.4415, -12.9032, 72.8599, -19.3548, 74.261, -22.5806, 42.0345, -77.4194, 40.6334, -85.4839, 47.6392, -85.4839, 54.6449, -93.5484, 43.4357, -109.677, 50.4415, -119.355, 61.6507, -123.567, 85.813, -129.032, 103.685, -137.097, 78.4645, -136.736, 55.7697, -167.742, 50.4415, -204.839, 39.2322, -228.921, 32.7954)
+
+[node name="Bush2" parent="." instance=ExtResource("2_fc5bd")]
+position = Vector2(-61, -225)

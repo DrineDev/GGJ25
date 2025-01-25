@@ -4,13 +4,19 @@ public partial class Player : CharacterBody2D {
     [Signal]
     public delegate void PlayerDiedEventHandler();
     public const float Speed = 500.0f;
+    public const float DashSpeed = 1500.0f; // Speed during dash
+    public const float DashDistance = 300.0f; // Distance to dash
+    public const float DownSpeedMultiplier = 1.5f; // Multiplier for downward speed
     public int HP { get; private set; } = 10; // Player's health
 
     public bool IsInStealthMode { get; private set; } = false;
     public bool IsAlive = true;
+    private bool IsDashing = false; // Track if the player is dashing
 
     private CpuParticles2D deathParticles;
-    private AnimatedSprite2D sprite; // Reference to the AnimatedSprite2D node
+    private AnimatedSprite2D sprite; 
+    private AudioStreamPlayer2D hurtMusic;
+    private AudioStreamPlayer2D failMusic;
 
     public override void _Ready() {
         // Get the CPUParticles2D node
@@ -29,23 +35,68 @@ public partial class Player : CharacterBody2D {
     }
 
     public override void _PhysicsProcess(double delta) {
+        if (!IsAlive) return;
+
         Vector2 velocity = Velocity;
 
-        // Get input direction
-        if (IsAlive) {
-            Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-            if (direction != Vector2.Zero) {
-                velocity = direction * Speed;
-                UpdateSpriteOrientation(direction); // Update sprite based on direction
-            } else {
-                velocity = Vector2.Zero;
-                sprite.Play("idle"); // Play idle animation when not moving
+        if (!IsDashing) {
+            // Move towards the mouse cursor
+            Vector2 mousePosition = GetGlobalMousePosition();
+            Vector2 direction = (mousePosition - GlobalPosition).Normalized();
+
+            // Increase downward speed
+            if (direction.Y > 0) {
+                direction.Y *= DownSpeedMultiplier;
             }
 
-            // Move the player
-            Velocity = velocity;
-            MoveAndSlide();
+            velocity = direction * Speed;
+
+            // Update sprite orientation based on direction
+            UpdateSpriteOrientation(direction);
         }
+
+        // Move the player
+        Velocity = velocity;
+        MoveAndSlide();
+    }
+
+    public override void _Input(InputEvent @event) {
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.ButtonIndex == MouseButton.Left && mouseEvent.Pressed) {
+            // Trigger dash when left mouse button is pressed
+            Dash();
+        }
+    }
+
+    private void Dash() {
+        if (IsDashing) return; // Prevent multiple dashes
+
+        IsDashing = true;
+        IsInStealthMode = true;
+
+        // Calculate dash direction based on mouse position
+        Vector2 mousePosition = GetGlobalMousePosition();
+        Vector2 dashDirection = (mousePosition - GlobalPosition).Normalized();
+
+        // Increase downward speed during dash
+        if (dashDirection.Y > 0) {
+            dashDirection.Y *= DownSpeedMultiplier;
+        }
+
+        // Set dash velocity
+        Velocity = dashDirection * DashSpeed;
+
+        // Use a timer to control the dash duration
+        Timer dashTimer = new Timer();
+        AddChild(dashTimer);
+        dashTimer.WaitTime = DashDistance / DashSpeed; // Time = Distance / Speed
+        dashTimer.OneShot = true;
+        dashTimer.Timeout += () => {
+            IsDashing = false;
+            IsInStealthMode = false;
+            Velocity = Vector2.Zero; // Stop movement after dash
+            dashTimer.QueueFree(); // Clean up the timer
+        };
+        dashTimer.Start();
     }
 
     public void SetStealthMode(bool stealth) {
@@ -67,6 +118,8 @@ public partial class Player : CharacterBody2D {
         } else { // Deal damage
             HP -= damage;
             GD.Print($"Player took {damage} damage! HP: {HP}");
+            hurtMusic = GetNode<AudioStreamPlayer2D>("HurtMusic");
+            hurtMusic.Play();
         }
 
         // Check if the player is dead
@@ -90,6 +143,10 @@ public partial class Player : CharacterBody2D {
             deathParticles.GlobalPosition = this.GlobalPosition;
             deathParticles.Restart(); // Restart the particle system
             deathParticles.Emitting = true; // Ensure particles are emitting
+            hurtMusic = GetNode<AudioStreamPlayer2D>("HurtMusic");
+            hurtMusic.Play();
+            failMusic = GetNode<AudioStreamPlayer2D>("DeathMusic");
+            failMusic.Play();
         } else {
             GD.PrintErr("Death particles node is missing!");
         }
@@ -97,6 +154,7 @@ public partial class Player : CharacterBody2D {
         // Emit the PlayerDied signal
         GD.Print("Emitting PlayerDied signal...");
         EmitSignal(SignalName.PlayerDied);
+        
 
         // Restart the game after a delay
         GetTree().CreateTimer(3.0f).Timeout += RestartGame;

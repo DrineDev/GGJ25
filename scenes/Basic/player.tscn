@@ -1,7 +1,9 @@
-[gd_scene load_steps=67 format=3 uid="uid://5moy68455klq"]
+[gd_scene load_steps=69 format=3 uid="uid://5moy68455klq"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_3kx2m"]
 [ext_resource type="Texture2D" uid="uid://dmq2mhke4glhd" path="res://assets/Bubble_Sprite_Sheet.png" id="2_4ukj0"]
+[ext_resource type="AudioStream" uid="uid://cx4bhp4t364eu" path="res://Audio/game over womp womp.wav" id="3_3boua"]
+[ext_resource type="AudioStream" uid="uid://b2njkf0ybd4l6" path="res://Audio/hurt.wav" id="3_12qlp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1x25l"]
 atlas = ExtResource("2_4ukj0")
@@ -475,3 +477,9 @@ initial_velocity_max = 100.0
 scale_amount_min = 3.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_5ojkj")
+
+[node name="DeathMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3boua")
+
+[node name="HurtMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_12qlp")

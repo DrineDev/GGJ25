@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Enemy2 : BaseEnemy
 {
-    [Export] public new float Speed = 200.0f;
+    [Export] public new float Speed = 300.0f;
     [Export] public new float WanderSpeed = 500.0f;
     [Export] public new float WaitTime = 2.0f;
 

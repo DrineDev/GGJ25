@@ -14,6 +14,7 @@ public partial class Killzone : Area2D
         if (body is Player player)
         {
             GD.Print("Player entered the killzone!");
+            player.ActivateOrbs();
             player.TakeDamage(1); // Reduce the player's HP by 1
         }
         // Check if the body that entered the killzone is an enemy

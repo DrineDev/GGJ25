@@ -14,13 +14,21 @@ public partial class Killzone : Area2D
         if (body is Player player)
         {
             GD.Print("Player entered the killzone!");
-            player.TakeDamage(1); // Reduce the player's HP by 1
+            // player.TakeDamage(1); // Reduce the player's HP by 1
         }
         // Check if the body that entered the killzone is an enemy
-        else if (body is Enemy enemy)
+        else if (body is IEnemy enemy)
         {
             GD.Print("Enemy entered the killzone!");
-            enemy.QueueFree(); // Despawn the enemy
+            // Cast the enemy to a Node and call QueueFree
+            if (enemy is Node enemyNode)
+            {
+                enemyNode.QueueFree(); // Despawn the enemy
+            }
+            else
+            {
+                GD.PrintErr("Enemy does not inherit from Node!");
+            }
         }
     }
 }

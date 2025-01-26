@@ -1,14 +1,24 @@
 using Godot;
-using System;
 
 public partial class PlatformManager : Node2D
 {
     [Export] private Node2D _scene; // Parent node for instantiated groups
-    [Export] public float _levelSpeed {get; set;} = 200f; // Speed at which groups move
-    [Export] private PackedScene[] _groups; // Array of group scenes to instantiate
+    [Export] public float _levelSpeed { get; set; } = 200f; // Speed at which groups move
     [Export] private float _groupLength = 250f; // Spacing between groups
 
+    // Platform groups for each level
+    [Export] private PackedScene[] _platformGroupsLevel1;
+    [Export] private PackedScene[] _platformGroupsLevel2;
+    [Export] private PackedScene[] _platformGroupsLevel3;
+
     private float _currentGroupProgress = 0; // Tracks movement progress
+    private int _currentLevel = 0; // Current level index
+    private int _score = 0; // Current score
+    private float _timeElapsed = 0; // Time elapsed since the game started
+
+    // Signal to notify when the level changes
+    [Signal]
+    public delegate void LevelChangedEventHandler(int newLevel);
 
     public override void _Ready()
     {
@@ -23,9 +33,12 @@ public partial class PlatformManager : Node2D
 
         // Find the player node and connect to its PlayerDied signal
         Player player = GetNode<Player>("../Player"); // Adjust the path to your player node
-        if (player != null) {
+        if (player != null)
+        {
             player.PlayerDied += OnPlayerDied;
-        } else {
+        }
+        else
+        {
             GD.PrintErr("Player node not found!");
         }
     }
@@ -67,16 +80,24 @@ public partial class PlatformManager : Node2D
             // Reset progress
             _currentGroupProgress -= _groupLength;
         }
+
+        // Update score based on time elapsed (slower progression)
+        _timeElapsed += (float)delta;
+        _score = (int)(_timeElapsed / 2); // Adjust the divisor to make points harder to earn
+
+        // Check for level transitions based on score
+        CheckLevelTransition();
     }
 
     private void _InstantiateGroup(int offset = 0, int type = -1)
     {
-        int index = (type == -1) ? (int)(GD.Randi() % _groups.Length) : type;
-        PackedScene selectedScene = _groups[index];
+        PackedScene[] currentPlatformGroup = GetCurrentPlatformGroup();
+        int index = (type == -1) ? (int)(GD.Randi() % currentPlatformGroup.Length) : type;
+        PackedScene selectedScene = currentPlatformGroup[index];
 
         if (selectedScene == null)
         {
-            GD.PrintErr("Invalid PackedScene in _groups array!");
+            GD.PrintErr("Invalid PackedScene in platform group array!");
             return;
         }
 
@@ -92,12 +113,13 @@ public partial class PlatformManager : Node2D
 
     private void _InstantiateGroupAtY(float y, int type = -1)
     {
-        int index = (type == -1) ? (int)(GD.Randi() % _groups.Length) : type;
-        PackedScene selectedScene = _groups[index];
+        PackedScene[] currentPlatformGroup = GetCurrentPlatformGroup();
+        int index = (type == -1) ? (int)(GD.Randi() % currentPlatformGroup.Length) : type;
+        PackedScene selectedScene = currentPlatformGroup[index];
 
         if (selectedScene == null)
         {
-            GD.PrintErr("Invalid PackedScene in _groups array!");
+            GD.PrintErr("Invalid PackedScene in platform group array!");
             return;
         }
 
@@ -111,8 +133,43 @@ public partial class PlatformManager : Node2D
         GD.Print($"Instantiated group at y = {y}");
     }
 
-    private void OnPlayerDied() {
+    private void OnPlayerDied()
+    {
         GD.Print("Player died! Stopping platform movement...");
         _levelSpeed = 0;
+    }
+
+    private void CheckLevelTransition()
+    {
+        int[] levelThresholds = { 10, 20, 30 }; // thresholds
+
+        if (_currentLevel < levelThresholds.Length && _score >= levelThresholds[_currentLevel])
+        {
+            _currentLevel++;
+            GD.Print($"LEVEL TRANSITION TRIGGERED! Emitting signal for level {_currentLevel}");
+
+            // Emit the LevelChanged signal with extensive logging
+            GD.Print("Attempting to emit LevelChanged signal...");
+            try 
+            {
+                EmitSignal(SignalName.LevelChanged, _currentLevel);
+                GD.Print($"Successfully emitted LevelChanged signal for level {_currentLevel}");
+            }
+            catch (System.Exception e)
+            {
+                GD.PrintErr($"Error emitting LevelChanged signal: {e.Message}");
+            }
+        }
+    }
+
+    private PackedScene[] GetCurrentPlatformGroup()
+    {
+        switch (_currentLevel)
+        {
+            case 0: return _platformGroupsLevel1;
+            case 1: return _platformGroupsLevel2;
+            case 2: return _platformGroupsLevel3;
+            default: return _platformGroupsLevel1; // Default to level 1 if out of bounds
+        }
     }
 }

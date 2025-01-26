@@ -7,6 +7,12 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Volcano" parent="." instance=ExtResource("4_4hurv")]
+position = Vector2(274, -18)
+
+[node name="Volcano2" parent="." instance=ExtResource("4_4hurv")]
+position = Vector2(-39, -11)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -38,17 +44,3 @@ texture = ExtResource("3_n27i2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D3/StaticBody2D"]
 polygon = PackedVector2Array(155.882, 12.6774, 150, -16.9032, 133.824, -33.8064, 76.4706, -49.3011, 19.1176, -63.3871, 10.2941, -63.3871, 4.41177, -40.8495, -38.2353, -43.6667, -60.2941, -39.4409, -72.0588, -30.9892, -100, -32.3979, -145.588, -35.2151, -163.235, -29.5806, -185.294, -22.5376, -197.059, -12.6774, -195.588, -2.8172, -185.294, 2.8172, -141.176, 4.22581, -135.294, 5.63441, -130.882, 21.129, -130.882, 29.5806, -125, 8.45161, -116.176, 5.63441, -89.7059, 7.04301, -57.3529, 8.45161, -20.5882, 15.4946, -13.2353, 28.172, -8.82355, 45.0753, -1.47058, 29.5806, 4.41177, 18.3118, 19.1176, 15.4946, 25, 32.3979, 26.4706, 42.2581, 35.2941, 21.129, 57.3529, 23.9462, 73.5294, 28.172, 97.0588, 30.9892, 111.765, 35.2151, 127.941, 28.172, 133.824, 38.0323, 144.118, 36.6237, 150, 25.3548)
-
-[node name="Volcano" parent="." instance=ExtResource("4_4hurv")]
-position = Vector2(302, -55)
-scale = Vector2(0.1, 0.1)
-eruptionInterval = 2.0
-eruptionDuration = 1.0
-damage = 1
-
-[node name="Volcano2" parent="." instance=ExtResource("4_4hurv")]
-position = Vector2(45, -58)
-scale = Vector2(0.1, 0.1)
-eruptionInterval = 2.0
-eruptionDuration = 1.0
-damage = 1

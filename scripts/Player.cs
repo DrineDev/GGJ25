@@ -32,6 +32,9 @@ public partial class Player : CharacterBody2D {
         if (sprite == null) {
             GD.PrintErr("AnimatedSprite2D node not found!");
         }
+
+        // Play the default animation initially
+        sprite.Play("default");
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -51,8 +54,10 @@ public partial class Player : CharacterBody2D {
 
             velocity = direction * Speed;
 
-            // Update sprite orientation based on direction
-            UpdateSpriteOrientation(direction);
+            // Play the default animation if not dashing
+            if (sprite.Animation != "default") {
+                sprite.Play("default");
+            }
         }
 
         // Move the player
@@ -85,6 +90,9 @@ public partial class Player : CharacterBody2D {
         // Set dash velocity
         Velocity = dashDirection * DashSpeed;
 
+        // Play the dash animation
+        sprite.Play("dash");
+
         // Use a timer to control the dash duration
         Timer dashTimer = new Timer();
         AddChild(dashTimer);
@@ -95,6 +103,9 @@ public partial class Player : CharacterBody2D {
             IsInStealthMode = false;
             Velocity = Vector2.Zero; // Stop movement after dash
             dashTimer.QueueFree(); // Clean up the timer
+
+            // Reset to the default animation after dash
+            sprite.Play("default");
         };
         dashTimer.Start();
     }
@@ -154,7 +165,6 @@ public partial class Player : CharacterBody2D {
         // Emit the PlayerDied signal
         GD.Print("Emitting PlayerDied signal...");
         EmitSignal(SignalName.PlayerDied);
-        
 
         // Restart the game after a delay
         GetTree().CreateTimer(3.0f).Timeout += RestartGame;
@@ -162,39 +172,5 @@ public partial class Player : CharacterBody2D {
 
     public void RestartGame() {
         GetTree().ReloadCurrentScene();
-    }
-
-    private void UpdateSpriteOrientation(Vector2 direction) {
-        if (sprite == null) return;
-
-        // Normalize the direction vector
-        direction = direction.Normalized();
-
-        // Determine the animation based on the direction
-        if (direction.Y < -0.7f) {
-            // Up
-            sprite.Play("walk_up");
-        } else if (direction.Y > 0.7f) {
-            // Down
-            sprite.Play("walk_down");
-        } else if (direction.X < -0.7f) {
-            // Left
-            sprite.Play("walk_left");
-        } else if (direction.X > 0.7f) {
-            // Right
-            sprite.Play("walk_right");
-        } else if (direction.X < -0.5f && direction.Y < -0.5f) {
-            // Up-Left
-            sprite.Play("walk_up_left");
-        } else if (direction.X > 0.5f && direction.Y < -0.5f) {
-            // Up-Right
-            sprite.Play("walk_up_right");
-        } else if (direction.X < -0.5f && direction.Y > 0.5f) {
-            // Down-Left
-            sprite.Play("walk_down_left");
-        } else if (direction.X > 0.5f && direction.Y > 0.5f) {
-            // Down-Right
-            sprite.Play("walk_down_right");
-        }
     }
 }

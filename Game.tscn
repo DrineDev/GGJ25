@@ -1,6 +1,11 @@
+
 [gd_scene load_steps=22 format=3 uid="uid://b4u5v5g5xq43c"]
 
+
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_5gbhr"]
+[ext_resource type="Texture2D" uid="uid://c6sr3e2g6gelo" path="res://assets/background2.png" id="2_p7w6x"]
 [ext_resource type="PackedScene" uid="uid://bn8kn4lqubxi3" path="res://scenes/Managers/PlatformManager.tscn" id="3_72ay3"]
+[ext_resource type="Texture2D" uid="uid://ccpvh0mjqlnwe" path="res://assets/background3.png" id="3_uy83f"]
 [ext_resource type="PackedScene" uid="uid://d2sote2v553x8" path="res://scenes/Basic/Enemy2.tscn" id="3_v6w6q"]
 [ext_resource type="PackedScene" uid="uid://c8mvpdv2qqti0" path="res://scenes/Blocks/level1 platforms/LegitBlock1.tscn" id="3_yhj5v"]
 [ext_resource type="PackedScene" uid="uid://b1n1cuobqfe42" path="res://scenes/Blocks/level1 platforms/LegitBlock2.tscn" id="4_0k48r"]
@@ -18,23 +23,51 @@
 [ext_resource type="PackedScene" uid="uid://dosygucu1tbp5" path="res://scenes/Blocks/level1 platforms/LegitBlock11.tscn" id="13_82mrv"]
 [ext_resource type="PackedScene" uid="uid://ch61dlkww3pww" path="res://IngameHUD.tscn" id="16_c26j5"]
 [ext_resource type="Script" path="res://heart_display.gd" id="16_gqh0p"]
+[ext_resource type="PackedScene" uid="uid://8c2rdj80csjx" path="res://scenes/Blocks/level2 platforms/LegitBlock1Level2.tscn" id="16_deakn"]
 [ext_resource type="PackedScene" uid="uid://5moy68455klq" path="res://scenes/Basic/player.tscn" id="17_3o75y"]
 [ext_resource type="Texture2D" uid="uid://btv6dxfa7ncp5" path="res://assets/GUI/heart.png" id="17_gqxlv"]
 [ext_resource type="PackedScene" uid="uid://44836tmld5c8" path="res://Audio/GameMusic.tscn" id="19_sglxm"]
+[ext_resource type="Texture2D" uid="uid://cujiegd24gb15" path="res://assets/background1.png" id="23_oqkt5"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_5gbhr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6.00005, 26)
+scale = Vector2(2.299, 2.08191)
+texture = ExtResource("23_oqkt5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(6.00005, 26)
+scale = Vector2(2.29899, 2.08191)
+texture = ExtResource("2_p7w6x")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(70, 128)
+scale = Vector2(2.29899, 2.08191)
+texture = ExtResource("3_uy83f")
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("6_siglb")]
 _scene = NodePath(".")
+
 _levelSpeed = 200.0
 _enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("3_v6w6q")])
+
 _minX = -600.0
 _maxX = 600.0
+_enemiesLevel1 = Array[PackedScene]([ExtResource("8_pkqu3")])
+_enemiesLevel2 = Array[PackedScene]([ExtResource("3_v6w6q"), ExtResource("8_pkqu3")])
+_enemiesLevel3 = Array[PackedScene]([ExtResource("3_v6w6q"), ExtResource("8_pkqu3")])
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("3_72ay3")]
 _scene = NodePath(".")
-_groups = Array[PackedScene]([ExtResource("3_yhj5v"), ExtResource("4_0k48r"), ExtResource("5_liv7j"), ExtResource("6_5x6a7"), ExtResource("7_l6540"), ExtResource("8_el6b2"), ExtResource("9_vt471"), ExtResource("10_8m15o"), ExtResource("11_ikpau"), ExtResource("12_56joc"), ExtResource("13_82mrv")])
 _groupLength = 350.0
+_platformGroupsLevel1 = Array[PackedScene]([ExtResource("3_yhj5v"), ExtResource("4_0k48r"), ExtResource("5_liv7j"), ExtResource("6_5x6a7"), ExtResource("7_l6540"), ExtResource("8_el6b2"), ExtResource("9_vt471"), ExtResource("10_8m15o"), ExtResource("11_ikpau"), ExtResource("12_56joc"), ExtResource("13_82mrv")])
+_platformGroupsLevel2 = Array[PackedScene]([ExtResource("16_deakn")])
+_platformGroupsLevel3 = Array[PackedScene]([ExtResource("13_82mrv")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -150,3 +183,4 @@ position = Vector2(-305, -529)
 position = Vector2(3, 407)
 
 [node name="GameMusic" parent="." instance=ExtResource("19_sglxm")]
+visible = false

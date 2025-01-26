@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://t7jpwprvfunf"]
+[gd_scene load_steps=5 format=3 uid="uid://b4b370dx1rp03"]
 
+[ext_resource type="Texture2D" uid="uid://ce2lya1rwkrqi" path="res://assets/platforms/BushLevel3.png" id="1_upq6n"]
+[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="2_a1lek"]
 
-[ext_resource type="Texture2D" uid="uid://cx68p072mc6w3" path="res://assets/platforms/BushLevel2.png" id="1_jw1lj"]
-
-[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="2_uhj7w"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_amlo5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlqa7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_jw1lj")
+"texture": ExtResource("1_upq6n")
 }],
 "loop": true,
 "name": &"default",
@@ -19,17 +17,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ncmvh"]
 radius = 555.628
 
-[node name="Bush2" type="Node2D"]
+[node name="Bush3" type="Node2D"]
 position = Vector2(134, 66)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-
 position = Vector2(-60.4613, 201.948)
 scale = Vector2(0.085, 0.053)
+sprite_frames = SubResource("SpriteFrames_qlqa7")
 
-sprite_frames = SubResource("SpriteFrames_amlo5")
-
-[node name="StealthZone" parent="AnimatedSprite2D" instance=ExtResource("2_uhj7w")]
+[node name="StealthZone" parent="AnimatedSprite2D" instance=ExtResource("2_a1lek")]
 position = Vector2(-9.4668, 27.3851)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/StealthZone"]

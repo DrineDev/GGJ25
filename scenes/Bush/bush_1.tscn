@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://tcd3nsxbxexc"]
 
-[ext_resource type="Texture2D" uid="uid://cr7vl8h0iria6" path="res://assets/platforms/bush_platform_cave.png" id="1_hih4d"]
-[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/StealthZone.tscn" id="2_pvq6d"]
+[ext_resource type="Texture2D" uid="uid://np0tdtmqft1s" path="res://assets/platforms/BushLevel1.png" id="1_w16db"]
+[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="2_pvq6d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fb337"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_hih4d")
+"texture": ExtResource("1_w16db")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -15,14 +15,14 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wx8u5"]
-radius = 227.762
+radius = 495.52
 
 [node name="Bush1" type="Node2D"]
 position = Vector2(134, 66)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2.99998, 0.999992)
-scale = Vector2(0.118545, 0.0702988)
+position = Vector2(-20.9544, 24.9368)
+scale = Vector2(0.085, 0.045)
 sprite_frames = SubResource("SpriteFrames_fb337")
 animation = &"new_animation"
 
@@ -30,5 +30,5 @@ animation = &"new_animation"
 position = Vector2(-16.8711, -42.6749)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/StealthZone"]
-position = Vector2(59.0493, 113.8)
+position = Vector2(-18.429, 88.9327)
 shape = SubResource("CircleShape2D_wx8u5")

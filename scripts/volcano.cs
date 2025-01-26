@@ -8,21 +8,21 @@ public partial class volcano : Node2D
 
     private Area2D airEruption;
     private Timer eruptionTimer;
+    private CpuParticles2D eruptionParticles;
+    private AnimatedSprite2D animatedSprite;
     private bool isErupting = false;
 
     public override void _Ready()
     {
-
-		GD.Print("SCRIPT IS RUNNING......");
         // Get references to nodes
         airEruption = GetNode<Area2D>("AirEruption");
         eruptionTimer = GetNode<Timer>("EruptionTimer");
+        eruptionParticles = GetNode<CpuParticles2D>("AnimatedSprite2D/CPUParticles2D");
+        animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         // Debug: Check if nodes are found
-        if (airEruption == null)
-            GD.PrintErr("AirEruption Area2D not found!");
-        if (eruptionTimer == null)
-            GD.PrintErr("EruptionTimer not found!");
+        if (animatedSprite == null)
+            GD.PrintErr("AnimatedSprite2D not found!");
 
         // Set up the timer
         eruptionTimer.WaitTime = eruptionInterval;
@@ -31,15 +31,19 @@ public partial class volcano : Node2D
 
         // Connect the Area2D signals
         airEruption.BodyEntered += OnBodyEnteredEruption;
+    }
 
-        // Debug: Confirm signal connection
-        GD.Print("Volcano initialized. Eruption interval: ", eruptionInterval);
+    public override void _Process(double delta)
+    {
+        // Update the particles' position to match the volcano's position
+        if (eruptionParticles != null)
+        {
+            eruptionParticles.GlobalPosition = animatedSprite.GlobalPosition;
+        }
     }
 
     private void OnEruptionTimerTimeout()
     {
-        // Debug: Confirm timer is working
-        GD.Print("EruptionTimer timeout. Starting eruption.");
         StartEruption();
     }
 
@@ -48,11 +52,24 @@ public partial class volcano : Node2D
         isErupting = true;
         GD.Print("Volcano is erupting!");
 
-        // Enable the eruption area
-        airEruption.Monitoring = true;
+        // Play the Explode animation with a delay
+        GetTree().CreateTimer(0.0f).Timeout += () => 
+        {
+            animatedSprite.Play("Explode");
+        };
+        animatedSprite.Play("Default");
 
-        // Debug: Confirm monitoring is enabled
-        GD.Print("AirEruption monitoring: ", airEruption.Monitoring);
+        // Start particles with a slight delay
+        GetTree().CreateTimer(0.7f).Timeout += () => 
+        {
+            airEruption.Monitoring = true;
+
+            if (eruptionParticles != null)
+            {
+                eruptionParticles.Restart();
+                eruptionParticles.Emitting = true;
+            }
+        };
 
         // Schedule the end of the eruption
         GetTree().CreateTimer(eruptionDuration).Timeout += EndEruption;
@@ -66,20 +83,20 @@ public partial class volcano : Node2D
         // Disable the eruption area
         airEruption.Monitoring = false;
 
-        // Debug: Confirm monitoring is disabled
-        GD.Print("AirEruption monitoring: ", airEruption.Monitoring);
+        // Stop the particle effect
+        if (eruptionParticles != null)
+        {
+            eruptionParticles.Emitting = false;
+        }
+
+        // Return to default animation
+        animatedSprite.Play("default");
     }
 
     private void OnBodyEnteredEruption(Node2D body)
     {
-        // Debug: Confirm the signal is triggered
-        GD.Print("Body entered eruption area: ", body.Name);
-
         if (isErupting && body is Player player)
         {
-            // Debug: Confirm player is detected
-            GD.Print("Player detected in eruption area.");
-
             // Damage the player
             player.TakeDamage(damage);
             GD.Print("Player took damage from the volcano eruption!");

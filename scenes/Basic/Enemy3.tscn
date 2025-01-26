@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://daayhgtx7yhvm"]
+
+[ext_resource type="Texture2D" uid="uid://caufdgpksl8ff" path="res://assets/Flame.png" id="1_6pw2w"]
+[ext_resource type="Script" path="res://scripts/Enemy3.cs" id="1_28yrh"]
+[ext_resource type="PackedScene" uid="uid://rao8f3255xm7" path="res://scenes/Basic/Killzone.tscn" id="2_tn6ng"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3e1c3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6pw2w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v22w7"]
+radius = 16.1245
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_28yrh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -4.76837e-07)
+scale = Vector2(0.765, 0.505)
+sprite_frames = SubResource("SpriteFrames_3e1c3")
+
+[node name="Killzone" parent="." instance=ExtResource("2_tn6ng")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(28, 0)
+shape = SubResource("CircleShape2D_v22w7")

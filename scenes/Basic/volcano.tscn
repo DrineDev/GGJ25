@@ -381,5 +381,3 @@ position = Vector2(-1, -531)
 shape = SubResource("RectangleShape2D_asnx2")
 
 [node name="EruptionTimer" type="Timer" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]

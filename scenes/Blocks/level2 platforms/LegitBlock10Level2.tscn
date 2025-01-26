@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://u6tf131chd60"]
+
+[ext_resource type="PackedScene" uid="uid://b2kj1ebsd710k" path="res://scenes/Basic/volcano_2.tscn" id="1_7j5vc"]
+[ext_resource type="Texture2D" uid="uid://b0ni184hhxa67" path="res://assets/platforms/Platforms2_lvl_2.png" id="2_thmo6"]
+[ext_resource type="Texture2D" uid="uid://rqi4hb22n0ma" path="res://assets/platforms/Platforms4_lvl_2.png" id="3_nao7s"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Volcano2" parent="." instance=ExtResource("1_7j5vc")]
+position = Vector2(35, -17)
+scale = Vector2(0.29, 0.308)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-301, -17)
+scale = Vector2(0.36056, 0.379707)
+texture = ExtResource("2_thmo6")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(-158.087, -28.9697, -149.767, 147.482, 108.165, 160.65, 130.353, 337.102, 196.916, 173.818, 230.198, 173.818, 355.003, 100.077, 299.534, 44.7714, 88.7509, -55.3058, 88.7509, -21.0689, 52.6959, -21.0689, -63.7896, -68.4738, -108.165, -68.4738, -97.0711, -21.0689)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(207, 21)
+scale = Vector2(0.38461, 0.390093)
+texture = ExtResource("3_nao7s")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D2/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(-626.608, -105.103, -717.609, -92.2856, -793.01, -46.1428, -834.611, 17.9444, -821.611, 48.7063, -800.811, 51.2698, -767.01, 58.9602, -715.01, 48.7063, -704.609, 76.9047, -694.209, 143.555, -665.609, 41.0158, -663.009, 66.6507, -639.609, 28.1984, -551.207, 25.6349, -499.207, 30.7619, -426.406, 51.2698, -421.206, 110.23, -405.605, 51.2698, -252.203, 48.7063, -205.403, 41.0158, -166.402, 43.5793, -145.602, 69.2142, 18.2002, 105.103, 44.2006, 184.571, 70.2009, 123.047, 91.0012, 87.1586, 114.401, 94.8491, 137.802, 276.857, 163.802, 251.222, 169.002, 107.667, 200.203, 110.23, 236.603, 94.8491, 267.804, 140.992, 296.404, 97.4126, 408.205, 58.9602, 455.006, 7.69046, 457.606, -28.1984, 327.604, -94.8491, 319.804, -135.865, 273.004, -133.301, 137.802, -189.698, 96.2012, -187.135, 143.002, -120.484, -2.60004, -148.682, -85.8011, -161.5, -93.6013, -148.682, -62.4008, -117.92, -10.4001, -74.3412, -111.802, -71.7777, -210.603, -105.103, -241.803, -102.54, -221.003, -66.6507, -288.604, -71.7777, -351.005, -99.9761, -478.406, -135.865, -449.806, -105.103, -613.608, -171.754, -673.409, -182.008, -670.809, -143.555)

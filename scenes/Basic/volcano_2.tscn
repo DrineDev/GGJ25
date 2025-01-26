@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2kj1ebsd710k"]
+
+[ext_resource type="Texture2D" uid="uid://dtw6mluk0hgo3" path="res://assets/platforms/level2/Volcano1_lvl2.png" id="1_allkt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ukttx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_allkt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53g85"]
+size = Vector2(72.5, 958.5)
+
+[node name="Volcano2" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.29, 0.308)
+sprite_frames = SubResource("SpriteFrames_ukttx")
+autoplay = "default"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+
+[node name="AirEruption" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirEruption"]
+position = Vector2(-1, -531)
+shape = SubResource("RectangleShape2D_53g85")
+
+[node name="EruptionTimer" type="Timer" parent="."]

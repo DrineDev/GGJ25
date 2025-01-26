@@ -1,6 +1,7 @@
 using Godot;
 
 public partial class Player : CharacterBody2D {
+
     [Signal]
     public delegate void PlayerDiedEventHandler();
     public const float Speed = 500.0f;
@@ -144,41 +145,44 @@ public partial class Player : CharacterBody2D {
         }
     }
 
-    public void Die() {
-        GD.Print("Player is dying...");
-        IsAlive = false;
+  public void Die() {
+		GD.Print("Player is dying...");
+		IsAlive = false;
 
-        // Disable the player's collision and visibility
-        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
-        Modulate = new Color(1, 1, 1, 0); // Make the player invisible
+		// Disable the player's collision and visibility
+		GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+		Modulate = new Color(1, 1, 1, 0); // Make the player invisible
 
-        // Check if the deathParticles node is valid
-        if (deathParticles != null) {
-            GD.Print("Playing death particles...");
-            deathParticles.GlobalPosition = this.GlobalPosition;
-            deathParticles.Restart(); // Restart the particle system
-            deathParticles.Emitting = true; // Ensure particles are emitting
-            hurtMusic = GetNode<AudioStreamPlayer2D>("HurtMusic");
-            hurtMusic.Play();
-            failMusic = GetNode<AudioStreamPlayer2D>("DeathMusic");
-            failMusic.Play();
-        } else {
-            GD.PrintErr("Death particles node is missing!");
-        }
+		// Check if the deathParticles node is valid
+		if (deathParticles != null) {
+			GD.Print("Playing death particles...");
+			deathParticles.GlobalPosition = this.GlobalPosition;
+			deathParticles.Restart(); // Restart the particle system
+			deathParticles.Emitting = true; // Ensure particles are emitting
+			hurtMusic = GetNode<AudioStreamPlayer2D>("HurtMusic");
+			hurtMusic.Play();
+			failMusic = GetNode<AudioStreamPlayer2D>("DeathMusic");
+			failMusic.Play();
+		} else {
+			GD.PrintErr("Death particles node is missing!");
+		}
 
-        // Emit the PlayerDied signal
-        GD.Print("Emitting PlayerDied signal...");
-        EmitSignal(SignalName.PlayerDied);
+		// Emit the PlayerDied signal
+		GD.Print("Emitting PlayerDied signal...");
+		EmitSignal(SignalName.PlayerDied);
+		
+		var scoringSystem = GetNode<Node>("/root/ScoringSystem");
+		if (scoringSystem != null) {
+			// Assuming you've added these methods to ScoringSystem
+			((GodotObject)scoringSystem).Call("stop_scoring");
+		}
+		
+		var restartMenu = GetNode<Control>($"../Camera2D/restart");
+		if (restartMenu != null) {
+			restartMenu.Visible = true;
+		}
+	}
 
-        // Notify the scoring system to stop scoring
-        var scoringSystem = GetNode<Node>("/root/ScoringSystem");
-        if (scoringSystem != null) {
-            ((GodotObject)scoringSystem).Call("stop_scoring");
-        }
-
-        // Restart the game after a delay
-        GetTree().CreateTimer(4.0f).Timeout += RestartGame;
-    }
 
     public void RestartGame() {
         // Reset the score before reloading the scene

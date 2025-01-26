@@ -20,23 +20,13 @@ offset_bottom = 95.0
 theme = ExtResource("1_10ww2")
 text = "Start"
 
-[node name="Options" type="Button" parent="."]
-layout_mode = 0
-offset_top = 120.0
-offset_right = 419.0
-offset_bottom = 215.0
-theme = ExtResource("1_10ww2")
-text = "options
-"
-
 [node name="Quit" type="Button" parent="."]
 layout_mode = 0
-offset_top = 240.0
+offset_top = 128.0
 offset_right = 419.0
-offset_bottom = 335.0
+offset_bottom = 223.0
 theme = ExtResource("1_10ww2")
 text = "QUIT"
 
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

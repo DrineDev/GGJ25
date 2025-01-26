@@ -6,8 +6,8 @@ public partial class Player : CharacterBody2D {
     public const float Speed = 500.0f;
     public const float DashSpeed = 1500.0f; // Speed during dash
     public const float DashDistance = 300.0f; // Distance to dash
-    public const float DownSpeedMultiplier = 1.5f; // Multiplier for downward speed
-    public int HP { get; private set; } = 10; // Player's health
+    public const float DownSpeedMultiplier = 2.5f; // Increased multiplier for downward speed
+    public int HP { get; private set; } = 5; // Player's health
 
     public bool IsInStealthMode { get; private set; } = false;
     public bool IsAlive = true;
@@ -49,7 +49,7 @@ public partial class Player : CharacterBody2D {
 
             // Increase downward speed
             if (direction.Y > 0) {
-                direction.Y *= DownSpeedMultiplier;
+                direction.Y *= DownSpeedMultiplier; // Apply the multiplier to downward movement
             }
 
             velocity = direction * Speed;

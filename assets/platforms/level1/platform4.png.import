@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b81xp6q3orgeb"
-path="res://.godot/imported/platform_cave3.png-05b29e9fe33c2e49a1b0aed27874eaf4.ctex"
+uid="uid://cxflaubhmoiks"
+path="res://.godot/imported/platform4.png-65a2255c8747c43ab1b1a814962c2b45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/platforms/platform_cave3.png"
-dest_files=["res://.godot/imported/platform_cave3.png-05b29e9fe33c2e49a1b0aed27874eaf4.ctex"]
+source_file="res://assets/platforms/level1/platform4.png"
+dest_files=["res://.godot/imported/platform4.png-65a2255c8747c43ab1b1a814962c2b45.ctex"]
 
 [params]
 

@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v8yie006jasr"
-path="res://.godot/imported/Platforms8_lvl_2.png-acadf498588b92efcdd6446325f4e586.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://bye2v3qe1o13c"
+valid=false
 
 [deps]
 
-source_file="res://assets/platforms/Platforms8_lvl_2.png"
-dest_files=["res://.godot/imported/Platforms8_lvl_2.png-acadf498588b92efcdd6446325f4e586.ctex"]
+source_file="res://assets/platforms/level2/Platforms8_lvl_2.png"
 
 [params]
 

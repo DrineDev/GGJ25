@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://t7jpwprvfunf"]
 
 [ext_resource type="Texture2D" uid="uid://nj3c72oil4rp" path="res://scenes/Bush/bush_lvl_2.png" id="1_71t8f"]
-[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/StealthZone.tscn" id="2_uhj7w"]
+[ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="2_uhj7w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_amlo5"]
 animations = [{
@@ -21,8 +21,8 @@ radius = 327.625
 position = Vector2(134, 66)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-49, 187)
-scale = Vector2(0.0985916, 0.0672232)
+position = Vector2(0.99999, 147.625)
+scale = Vector2(0.215962, 0.136424)
 sprite_frames = SubResource("SpriteFrames_amlo5")
 
 [node name="StealthZone" parent="AnimatedSprite2D" instance=ExtResource("2_uhj7w")]

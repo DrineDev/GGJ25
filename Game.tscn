@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bbb7t0ygwq6f2" path="res://scenes/Blocks/level1 platforms/LegitBlock5.tscn" id="7_l6540"]
 [ext_resource type="PackedScene" uid="uid://d2b63xynvhn1t" path="res://scenes/Blocks/level1 platforms/LegitBlock6.tscn" id="8_el6b2"]
 [ext_resource type="PackedScene" uid="uid://ci08es3faoc8" path="res://scenes/Basic/Enemy1.tscn" id="8_pkqu3"]
-[ext_resource type="PackedScene" path="res://scenes/Blocks/level1 platforms/LegitBlock7.tscn" id="9_vt471"]
+[ext_resource type="PackedScene" uid="uid://bl6t6ob1msxqy" path="res://scenes/Blocks/level1 platforms/LegitBlock7.tscn" id="9_vt471"]
 [ext_resource type="PackedScene" uid="uid://ca2ephnm24bnd" path="res://scenes/Blocks/level1 platforms/LegitBlock8.tscn" id="10_8m15o"]
 [ext_resource type="PackedScene" uid="uid://bvsh7x2ot5by7" path="res://scenes/Blocks/level1 platforms/LegitBlock9.tscn" id="11_ikpau"]
 [ext_resource type="PackedScene" uid="uid://cvbmaaf578aem" path="res://scenes/Blocks/level1 platforms/LegitBlock10.tscn" id="12_56joc"]
@@ -47,6 +47,10 @@ texture = ExtResource("3_uy83f")
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("6_siglb")]
 _scene = NodePath(".")
+
+_levelSpeed = 200.0
+_enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("3_v6w6q")])
+
 _minX = -600.0
 _maxX = 600.0
 _enemiesLevel1 = Array[PackedScene]([ExtResource("8_pkqu3")])

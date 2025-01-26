@@ -47,6 +47,10 @@ texture = ExtResource("3_uy83f")
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("6_siglb")]
 _scene = NodePath(".")
+
+_levelSpeed = 200.0
+_enemies = Array[PackedScene]([ExtResource("8_pkqu3"), ExtResource("3_v6w6q")])
+
 _minX = -600.0
 _maxX = 600.0
 _enemiesLevel1 = Array[PackedScene]([ExtResource("8_pkqu3")])

@@ -1,6 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://t7jpwprvfunf"]
 
+
 [ext_resource type="Texture2D" uid="uid://cx68p072mc6w3" path="res://assets/platforms/BushLevel2.png" id="1_jw1lj"]
+
 [ext_resource type="PackedScene" uid="uid://bn00f7y8kxwlq" path="res://scenes/Basic/StealthZone.tscn" id="2_uhj7w"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_amlo5"]
@@ -21,8 +23,10 @@ radius = 555.628
 position = Vector2(134, 66)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
 position = Vector2(-60.4613, 201.948)
 scale = Vector2(0.085, 0.053)
+
 sprite_frames = SubResource("SpriteFrames_amlo5")
 
 [node name="StealthZone" parent="AnimatedSprite2D" instance=ExtResource("2_uhj7w")]

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://1m85rulvtqtc"]
+
+[ext_resource type="Texture2D" uid="uid://5nrtng35s4yv" path="res://assets/platforms/Platforms3_lvl_2.png" id="1_oefle"]
+[ext_resource type="Texture2D" uid="uid://bg63mym7y7bk3" path="res://assets/platforms/Platforms5_lvl_2.png" id="2_4qoe1"]
+[ext_resource type="PackedScene" uid="uid://t7jpwprvfunf" path="res://scenes/Bush/bush_2.tscn" id="3_3gwtk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(144, -4)
+scale = Vector2(0.346184, 0.300413)
+texture = ExtResource("1_oefle")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(-462.182, -173.095, -456.404, -143.136, -421.741, -99.8626, -505.511, -93.2051, -557.507, -73.2326, -621.057, -33.2875, -618.168, -3.32876, -560.395, 29.9588, -502.623, 43.2738, -493.957, 69.9038, -485.291, 126.493, -473.736, 76.5613, -453.516, 23.3013, -447.738, 63.2463, -436.184, 23.3013, -335.082, 13.315, -222.425, 33.2875, -207.982, 103.191, -196.427, 46.6025, 46.2182, 36.6163, 54.8841, 53.2601, 225.314, 89.8763, 262.866, 189.739, 280.198, 159.78, 271.532, 113.178, 300.418, 83.2188, 326.416, 86.5476, 349.525, 252.985, 375.523, 236.342, 375.523, 99.8626, 444.85, 93.2051, 473.736, 136.479, 508.4, 93.2051, 618.168, 49.9313, 670.163, 6.65751, 661.497, -29.9588, 548.841, -106.52, 519.954, -139.808, 340.859, -196.396, 309.084, -193.068, 343.748, -136.479, 129.989, -159.78, 115.545, -149.794, 181.984, -99.8626, 138.654, -76.5613, 40.4409, -86.5476, -213.759, -116.506)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-377, -24)
+scale = Vector2(0.346184, 0.300413)
+texture = ExtResource("2_4qoe1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D2/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(103.991, -86.5476, 101.102, 29.9588, 207.982, 66.5751, 248.423, 176.424, 245.534, 69.9038, 283.086, 89.8763, 352.414, 89.8763, 343.748, 133.15, 378.411, 103.191, 531.509, 113.178, 719.27, -46.6026, 681.718, -79.8901, 600.836, -86.5476, 473.736, -53.2601, 387.077, -19.9725, 190.65, -116.506, 167.541, -109.849, 164.652, -79.8901, 176.207, -49.9313)
+
+[node name="Bush2" parent="." instance=ExtResource("3_3gwtk")]
+position = Vector2(142, -206)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b4u5v5g5xq43c"]
+[gd_scene load_steps=36 format=3 uid="uid://b4u5v5g5xq43c"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_5gbhr"]
 [ext_resource type="Texture2D" uid="uid://c6sr3e2g6gelo" path="res://assets/background2.png" id="2_p7w6x"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cahshy547mq3e" path="res://scenes/Blocks/level1 platforms/LegitBlock4.tscn" id="6_5x6a7"]
 [ext_resource type="PackedScene" uid="uid://djhql56qjyeat" path="res://scenes/Managers/EnemyManager.tscn" id="6_siglb"]
 [ext_resource type="PackedScene" uid="uid://bbb7t0ygwq6f2" path="res://scenes/Blocks/level1 platforms/LegitBlock5.tscn" id="7_l6540"]
+[ext_resource type="PackedScene" uid="uid://daayhgtx7yhvm" path="res://scenes/Basic/Enemy3.tscn" id="8_8ujh6"]
 [ext_resource type="PackedScene" uid="uid://d2b63xynvhn1t" path="res://scenes/Blocks/level1 platforms/LegitBlock6.tscn" id="8_el6b2"]
 [ext_resource type="PackedScene" uid="uid://ci08es3faoc8" path="res://scenes/Basic/Enemy1.tscn" id="8_pkqu3"]
 [ext_resource type="PackedScene" uid="uid://bl6t6ob1msxqy" path="res://scenes/Blocks/level1 platforms/LegitBlock7.tscn" id="9_vt471"]
@@ -62,6 +63,7 @@ _minX = -600.0
 _maxX = 600.0
 _enemiesLevel1 = Array[PackedScene]([ExtResource("8_pkqu3")])
 _enemiesLevel2 = Array[PackedScene]([ExtResource("3_v6w6q")])
+_enemiesLevel3 = Array[PackedScene]([ExtResource("8_8ujh6"), ExtResource("3_v6w6q"), ExtResource("8_pkqu3")])
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("3_72ay3")]
 _scene = NodePath(".")

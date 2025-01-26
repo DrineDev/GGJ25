@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bpd0xs5p1i353"]
+[gd_scene load_steps=25 format=3 uid="uid://bpd0xs5p1i353"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_t67ga"]
 [ext_resource type="Texture2D" uid="uid://cujiegd24gb15" path="res://assets/background1.png" id="2_a1kvx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://djhql56qjyeat" path="res://scenes/Managers/EnemyManager.tscn" id="5_21ggv"]
 [ext_resource type="PackedScene" uid="uid://ci08es3faoc8" path="res://scenes/Basic/Enemy1.tscn" id="6_rmtee"]
 [ext_resource type="PackedScene" uid="uid://d2sote2v553x8" path="res://scenes/Basic/Enemy2.tscn" id="7_xsej5"]
+[ext_resource type="PackedScene" uid="uid://daayhgtx7yhvm" path="res://scenes/Basic/Enemy3.tscn" id="8_2eagu"]
 [ext_resource type="PackedScene" uid="uid://bn8kn4lqubxi3" path="res://scenes/Managers/PlatformManager.tscn" id="8_7lvlv"]
 [ext_resource type="PackedScene" uid="uid://c8mvpdv2qqti0" path="res://scenes/Blocks/level1 platforms/LegitBlock1.tscn" id="9_t4ff1"]
 [ext_resource type="PackedScene" uid="uid://b1n1cuobqfe42" path="res://scenes/Blocks/level1 platforms/LegitBlock2.tscn" id="10_fcfin"]
@@ -28,7 +29,7 @@
 script = ExtResource("1_t67ga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(5.99998, 3.49994)
+position = Vector2(-1, -10)
 scale = Vector2(0.996667, 0.987)
 texture = ExtResource("2_a1kvx")
 
@@ -49,7 +50,8 @@ _scene = NodePath(".")
 _minX = -600.0
 _maxX = 600.0
 _enemiesLevel1 = Array[PackedScene]([ExtResource("6_rmtee")])
-_enemiesLevel2 = Array[PackedScene]([ExtResource("7_xsej5")])
+_enemiesLevel2 = Array[PackedScene]([ExtResource("7_xsej5"), ExtResource("6_rmtee")])
+_enemiesLevel3 = Array[PackedScene]([ExtResource("8_2eagu"), ExtResource("7_xsej5"), ExtResource("6_rmtee")])
 
 [node name="GameManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("8_7lvlv")]
 _scene = NodePath(".")

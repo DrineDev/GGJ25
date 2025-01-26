@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b4u5v5g5xq43c"]
+[gd_scene load_steps=35 format=3 uid="uid://b4u5v5g5xq43c"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_5gbhr"]
 [ext_resource type="Texture2D" uid="uid://c6sr3e2g6gelo" path="res://assets/background2.png" id="2_p7w6x"]
@@ -24,8 +24,16 @@
 [ext_resource type="PackedScene" uid="uid://5moy68455klq" path="res://scenes/Basic/player.tscn" id="17_3o75y"]
 [ext_resource type="Texture2D" uid="uid://btv6dxfa7ncp5" path="res://assets/GUI/heart.png" id="17_gqxlv"]
 [ext_resource type="PackedScene" uid="uid://44836tmld5c8" path="res://Audio/GameMusic.tscn" id="19_sglxm"]
+[ext_resource type="PackedScene" uid="uid://cvfxhxjqqhx0" path="res://scenes/Blocks/level3 platforms/LegitBlock1Level3.tscn" id="20_3mp8c"]
+[ext_resource type="PackedScene" uid="uid://bjwhkwfu20r7p" path="res://scenes/Blocks/level3 platforms/LegitBlock2Level3.tscn" id="21_u01t0"]
+[ext_resource type="PackedScene" uid="uid://dhgjx2ixh1qkg" path="res://scenes/Blocks/level3 platforms/LegitBlock3Level3.tscn" id="22_r6323"]
 [ext_resource type="Texture2D" uid="uid://cujiegd24gb15" path="res://assets/background1.png" id="23_oqkt5"]
 [ext_resource type="PackedScene" uid="uid://b4n3iexijt610" path="res://Restart.tscn" id="23_u88vf"]
+[ext_resource type="PackedScene" uid="uid://cf45lm3dlts4y" path="res://scenes/Blocks/level3 platforms/LegitBlock4Level3.tscn" id="23_w77wf"]
+[ext_resource type="PackedScene" uid="uid://c7hsxlmefif3k" path="res://scenes/Blocks/level3 platforms/LegitBlock5Level3.tscn" id="24_yrfbv"]
+[ext_resource type="PackedScene" uid="uid://co8uekp7f60lf" path="res://scenes/Blocks/level3 platforms/LegitBlock6Level3.tscn" id="25_rvefd"]
+[ext_resource type="PackedScene" uid="uid://3hbvcsmi7a22" path="res://scenes/Blocks/level3 platforms/LegitBlock7Level3.tscn" id="26_e6cra"]
+[ext_resource type="PackedScene" uid="uid://vr717jsdf2c5" path="res://scenes/Blocks/level3 platforms/LegitBlock8Level3.tscn" id="27_wdtuv"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_5gbhr")
@@ -60,6 +68,7 @@ _scene = NodePath(".")
 _groupLength = 350.0
 _platformGroupsLevel1 = Array[PackedScene]([ExtResource("3_yhj5v"), ExtResource("4_0k48r"), ExtResource("5_liv7j"), ExtResource("6_5x6a7"), ExtResource("7_l6540"), ExtResource("8_el6b2"), ExtResource("9_vt471"), ExtResource("10_8m15o"), ExtResource("11_ikpau"), ExtResource("12_56joc"), ExtResource("13_82mrv")])
 _platformGroupsLevel2 = Array[PackedScene]([null, null, null, null, null, null, null, null])
+_platformGroupsLevel3 = Array[PackedScene]([ExtResource("20_3mp8c"), ExtResource("21_u01t0"), ExtResource("22_r6323"), ExtResource("23_w77wf"), ExtResource("24_yrfbv"), ExtResource("25_rvefd"), ExtResource("26_e6cra"), ExtResource("27_wdtuv")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -162,7 +171,7 @@ stretch_mode = 2
 scale = Vector2(2, 2)
 texture = ExtResource("17_gqxlv")
 
-[node name="Control" parent="Camera2D" instance=ExtResource("16_c26j5")]
+[node name="score" parent="Camera2D" instance=ExtResource("16_c26j5")]
 offset_left = -24.0
 offset_top = -300.0
 offset_right = -24.0

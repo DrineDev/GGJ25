@@ -31,9 +31,9 @@ text = "QUIT"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 352.0
+offset_left = 336.0
 offset_top = 320.0
-offset_right = 500.0
+offset_right = 484.0
 offset_bottom = 343.0
 text = "Kalapukan Studios "
 

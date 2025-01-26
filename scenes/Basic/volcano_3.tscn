@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsx3oqht8ogcf"]
+[gd_scene load_steps=6 format=3 uid="uid://bsx3oqht8ogcf"]
 
+[ext_resource type="Script" path="res://scripts/volcano.cs" id="1_hoii4"]
 [ext_resource type="Texture2D" uid="uid://cm2vfm3p7clm3" path="res://assets/platforms/level3/Volcano3.png" id="1_rka78"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f5v5b"]
@@ -13,10 +14,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_8cdub"]
+_data = [Vector2(0.1, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6kagv"]
 size = Vector2(72.5, 958.5)
 
 [node name="Volcano3" type="Node2D"]
+script = ExtResource("1_hoii4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.09, 0.096)
@@ -24,6 +30,22 @@ sprite_frames = SubResource("SpriteFrames_f5v5b")
 autoplay = "default"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="AnimatedSprite2D"]
+top_level = true
+position = Vector2(-1, 0)
+emitting = false
+amount = 500
+lifetime = 2.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 49.95
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 171.42
+initial_velocity_max = 171.42
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_8cdub")
 
 [node name="AirEruption" type="Area2D" parent="."]
 

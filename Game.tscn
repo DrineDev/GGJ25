@@ -40,20 +40,20 @@ script = ExtResource("1_5gbhr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(6.00005, 26)
-scale = Vector2(2.299, 2.08191)
+position = Vector2(-4.99995, -5.99997)
+scale = Vector2(1.00667, 1.01)
 texture = ExtResource("23_oqkt5")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(6.00005, 26)
-scale = Vector2(2.29899, 2.08191)
+position = Vector2(5.92422, 0.738647)
+scale = Vector2(1.01308, 1.01348)
 texture = ExtResource("2_p7w6x")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(70, 128)
-scale = Vector2(2.29899, 2.08191)
+position = Vector2(4.00002, -3.49994)
+scale = Vector2(1.00667, 1.005)
 texture = ExtResource("3_uy83f")
 
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("6_siglb")]

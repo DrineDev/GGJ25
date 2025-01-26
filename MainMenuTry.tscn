@@ -1,0 +1,54 @@
+[gd_scene load_steps=21 format=3 uid="uid://bdklgn40n5b0v"]
+
+[ext_resource type="Script" path="res://main_menu_try.gd" id="1_dwito"]
+[ext_resource type="PackedScene" uid="uid://djhql56qjyeat" path="res://scenes/Managers/EnemyManager.tscn" id="1_x0cao"]
+[ext_resource type="PackedScene" uid="uid://ci08es3faoc8" path="res://scenes/Basic/Enemy1.tscn" id="2_57diy"]
+[ext_resource type="PackedScene" uid="uid://d2sote2v553x8" path="res://scenes/Basic/Enemy2.tscn" id="3_wys1s"]
+[ext_resource type="PackedScene" uid="uid://bn8kn4lqubxi3" path="res://scenes/Managers/PlatformManager.tscn" id="4_o2e2e"]
+[ext_resource type="PackedScene" uid="uid://c8mvpdv2qqti0" path="res://scenes/Blocks/level1 platforms/LegitBlock1.tscn" id="5_fdxr4"]
+[ext_resource type="PackedScene" uid="uid://b1n1cuobqfe42" path="res://scenes/Blocks/level1 platforms/LegitBlock2.tscn" id="6_fyhxv"]
+[ext_resource type="PackedScene" uid="uid://cg38kkfp3baet" path="res://scenes/Blocks/level1 platforms/LegitBlock3.tscn" id="7_jmqy2"]
+[ext_resource type="PackedScene" uid="uid://cahshy547mq3e" path="res://scenes/Blocks/level1 platforms/LegitBlock4.tscn" id="8_eqdvt"]
+[ext_resource type="PackedScene" uid="uid://bbb7t0ygwq6f2" path="res://scenes/Blocks/level1 platforms/LegitBlock5.tscn" id="9_gwtoe"]
+[ext_resource type="PackedScene" uid="uid://d2b63xynvhn1t" path="res://scenes/Blocks/level1 platforms/LegitBlock6.tscn" id="10_s6omd"]
+[ext_resource type="PackedScene" uid="uid://bl6t6ob1msxqy" path="res://scenes/Blocks/level1 platforms/LegitBlock7.tscn" id="11_5qd8l"]
+[ext_resource type="PackedScene" uid="uid://ca2ephnm24bnd" path="res://scenes/Blocks/level1 platforms/LegitBlock8.tscn" id="12_7ylgt"]
+[ext_resource type="PackedScene" uid="uid://bvsh7x2ot5by7" path="res://scenes/Blocks/level1 platforms/LegitBlock9.tscn" id="13_dylh8"]
+[ext_resource type="PackedScene" uid="uid://cvbmaaf578aem" path="res://scenes/Blocks/level1 platforms/LegitBlock10.tscn" id="14_wv8ff"]
+[ext_resource type="PackedScene" uid="uid://dosygucu1tbp5" path="res://scenes/Blocks/level1 platforms/LegitBlock11.tscn" id="15_4r2vd"]
+[ext_resource type="PackedScene" uid="uid://bqj1bl13d6mxa" path="res://MainMenu.tscn" id="16_dc7fy"]
+[ext_resource type="PackedScene" uid="uid://dg4nd4re0tqvl" path="res://GameBorder.tscn" id="17_737v2"]
+[ext_resource type="PackedScene" uid="uid://44836tmld5c8" path="res://Audio/GameMusic.tscn" id="19_ttp0r"]
+[ext_resource type="AudioStream" uid="uid://pg76ah8r88wx" path="res://Audio/main menu for real.wav" id="20_64dl5"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_dwito")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+follow_viewport_enabled = true
+
+[node name="Main Menu" parent="Camera2D/CanvasLayer" instance=ExtResource("16_dc7fy")]
+offset_left = -203.0
+offset_top = 29.0
+offset_right = -203.0
+offset_bottom = 29.0
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("1_x0cao")]
+_scene = NodePath(".")
+_levelSpeed = 200.0
+_enemies = Array[PackedScene]([ExtResource("2_57diy"), ExtResource("3_wys1s")])
+_minX = -600.0
+_maxX = 600.0
+
+[node name="GameManager" parent="." node_paths=PackedStringArray("_scene") instance=ExtResource("4_o2e2e")]
+_scene = NodePath(".")
+_groups = Array[PackedScene]([ExtResource("5_fdxr4"), ExtResource("6_fyhxv"), ExtResource("7_jmqy2"), ExtResource("8_eqdvt"), ExtResource("9_gwtoe"), ExtResource("10_s6omd"), ExtResource("11_5qd8l"), ExtResource("12_7ylgt"), ExtResource("13_dylh8"), ExtResource("14_wv8ff"), ExtResource("15_4r2vd")])
+_groupLength = 350.0
+
+[node name="GameBorder" parent="." instance=ExtResource("17_737v2")]
+position = Vector2(-305, -529)
+
+[node name="GameMusic" parent="." instance=ExtResource("19_ttp0r")]
+stream = ExtResource("20_64dl5")

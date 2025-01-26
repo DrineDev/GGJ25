@@ -11,12 +11,13 @@ public partial class Enemy3 : BaseEnemy
     {
         base._Ready(); // Call the base class's _Ready method
 
-        // Determine the initial direction based on spawn position
-        _isMovingRight = GlobalPosition.X < GetViewportRect().Size.X / 2;
+        // Randomly decide whether to spawn on the left or right side
+        bool spawnOnLeft = GD.Randf() > 0.5f; // 50% chance to spawn on the left
+        _isMovingRight = spawnOnLeft; // If spawning on the left, move right, and vice versa
 
         // Adjust spawn position to ensure it's within the screen bounds horizontally
         Rect2 viewportRect = GetViewportRect();
-        float spawnX = _isMovingRight ? -100 : viewportRect.Size.X + 100; // Spawn slightly outside the screen
+        float spawnX = spawnOnLeft ? -100 : viewportRect.Size.X + 100; // Spawn slightly outside the screen
         float spawnY = viewportRect.Size.Y - _spawnYOffset; // Spawn at a lower Y position
         GlobalPosition = new Vector2(spawnX, spawnY);
 

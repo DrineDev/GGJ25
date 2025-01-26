@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://3hbvcsmi7a22"]
+
+[ext_resource type="Texture2D" uid="uid://bbbjh26q4fpvq" path="res://assets/platforms/level3/Platform4_lvl_3.png" id="1_5wtxw"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-51.5, 11.375)
+scale = Vector2(0.366107, 0.239265)
+texture = ExtResource("1_5wtxw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(-4333.05, 200.257)
+scale = Vector2(1.06809, 1.52854)
+polygon = PackedVector2Array(4786.06, -162.827, 4721.68, -119.406, 4614.37, -97.6961, 4571.44, -70.5583, 4542.83, -103.124, 4464.13, -92.2685, 4456.98, -37.9929, 4456.98, 16.2827, 4442.67, 32.5654, 4428.36, -5.42756, 4421.21, -92.2685, 4378.28, -103.124, 4342.51, -81.4134, 4335.36, -27.1378, 4292.43, -103.124, 4113.58, -113.979, 4099.27, -141.117, 3970.5, -119.406, 3877.5, -108.551, 3827.42, -97.6961, 3777.34, -113.979, 3677.18, -151.972, 3569.87, -141.117, 3562.72, -124.834, 3534.1, -135.689, 3526.95, -103.124, 3512.64, -65.1307, 3505.49, -130.261, 3412.48, -130.261, 3276.56, -195.392, 3391.02, -233.385, 3476.87, -222.53, 3512.64, -244.24, 3655.72, -244.24, 3727.26, -238.813, 3820.27, -249.668, 3941.88, -276.806, 4049.2, -271.378, 4120.74, -276.806, 4185.12, -255.095, 4442.67, -233.385, 4621.52, -222.53, 4707.37, -217.102, 4778.91, -189.965)
